@@ -1,0 +1,129 @@
+##Objects and Classes
+----------------------
+- Distinction between objects (instances of classes) and
+classes (blueprints for creating objects)
+
+
+##class
+-------
+Katgoul blli:
+class hiya blueprint (plan) li katsawr lina structure dyal object, chno khaso ykoun fih, chno properties (variables/attributes) dyalo, w chno methods (fonctions) li y9dar ydir.
+Structure dyal object: kifach data kaytkhzn f object.
+Properties/priorities: hiya attributes li katmss object.
+Methods: functions li object y9dar ydirhom.
+
+##object
+--------
+Object huwa نسخة 7aqiqiya (instance) mn class, 3ndo attributes dyalo
+w y9dar yst3ml methods dyal class.
+
+Class = plan
+Object = dar 7aqiqi mabni mn had plan
+Kol object 3ndo l-values dyalo (attributes)
+w y9dar idir actions (methods) li 3rfhom class
+
+An object is a model of something that has data and
+behaviors associated with it, akin to physical objects we can
+sense and manipulate.
+- Object-oriented means being directed toward modeling
+these objects, providing a method for understanding and
+constructing complex systems.
+
+##self
+-------
+oki n9dr ngol mtalan . self 3ndha joj dyal adwar khatkhli lmethods li kaynin fclass y9dro wsli les attributes o tani hja had self kamtl lina lopject li kay3yt 3la had lmethod db.
+Bzzaf! 👍 9rit chi bzf mzyan. N9dr n9ol lik t3rifk shih b l-logique, ghir nbdl shwiya l-kalam باش ykoun precise f terminology dyal Python:
+**self katkhlli methods dyal class y9dro ywaslo l-attributes dyal object. ✅
+**self katmthal object li kay3yt daba 3la method. ✅
+B7al ma glti, joj dyal l-adwar: access attributes w represent current object.
+N9dr n3tik analogy:
+Tkhayyal class = plan dyal dar.
+Object = dar ma3mra mn had l-plan.
+self = dar li hna daba katsir fih l-action, w b self t9dar t9ra l-attributes (kamlin dyal dar) w tdir actions (methods) 3lihom.
+
+
+##init constructor
+-------------------
+init hia constructor ikhtisar dyal initialization kadir nit hadchi li msminha biha
+katinitializi varibles dyal l'object fach yalh kancreayiw wahd opject kansifto 
+m3ah les attributes dyalo had init hya lik katst9blhom wa lakin hna
+kayban lina had self zayada wa hana makansifthoch hadi had self 
+katl3b dawr dyal lopect braso lik kancreayiw da. dacki 3lach katchof 
+kandiro finit self.color = color rah bhala dran my_car.color = color . 
+
+
+*******************
+##OOP Consepts
+*******************
+
+##Encapsulation
+----------------
+Encapsulation hiya l7ifadh 3la data dyal object w controlling access dyalha.
+
+Katmchi bach attributes w methods dyal object yb9aw ma7foudin w ma t9drch objects akhorin ybaddlouhom direct.
+
+B analogy: tkhayyal dar w chi room f dar: ma t9drch tbdl furniture dyal room mn barra, khassek tdkhl mn door (method) bach tbdlo.
+
+F Python:
+
+Attributes katsma private b _ ou __ (underscore)
+
+Katdir getter w setter methods bach t9dar t9ra w tbaddl l-value b aman
+💡 Key idea:
+Encapsulation = protection dyal data + control 3la access dyalha
+
+##Inheritance
+---------------
+Inheritance hiya ila class jdida (child) katwarri l-attributes w methods 
+dyal class okhra (parent), w t9dar tzed chi haja jdida.
+
+: A mechanism where a new class can inherit attributes and
+behaviors from an existing class
+
+
+##Polymorphism
+---------------
+Polymorphism hiya kifash objects mn classes okhra y9dro yst3mlou nafs method b forms/manner mokhtalfa.
+Katmchi bach t9dar tst3ml method wa7da w objects mokhtalfa ydlo behavior mokhtalfa.
+
+1️⃣ Fin kanst3mloha:
+
+Mlli 3ndk classes mokhtalfa, w bghiti tst3ml nafs method 3la kol wa7da bla ma tktb code jdida.
+
+Mlli bghiti code flexible w scalable, li y9dar ykhdem m3a objects mokhtalfa.
+
+Mlli bghiti interface wa7da li tkhlli objects mokhtalfa y3mlou behavior mokhtalfa.
+
+B analogy:
+
+tkhayyal chi function make_sound li tkhlli kol creature y3ti sound dyalo.
+
+Ma t7tajch t3raf wach creature hiya dog, cat, bird… nafs function tkhlli object idir behavior dyalo.
+
+2️⃣ 3lach kanhtajoha:
+
+Flexibility: code ma tsirch strict 3la class wa7da
+
+Reusability: t9dar tst3ml nafs method f objects mokhtalfa
+
+Simplicity: ma tktbsh code mziyed, t9dar t3ml abstraction
+
+Scalability: ila zidti classes jdida (b7al Bird, Cow…), function wa7da t9dar thandle kol wa7da
+
+Exactly! 😎 daba fhamt mzyan. N9dro ngolo b darija romanized:
+
+Polymorphism katkhalik tst3ml nafs method f objects mokhtalfa, b had tariqa code kayb9a reusable w flexible.
+
+Method wa7da = t9dar tdir baz dyal objects mokhtalfa
+
+Ma khassekch tktb method jdida f kol class separately
+
+Katkhlli project kbira easier to manage w scalable
+
+
+##Abstraction
+----------------
+- Abstraction is used to simplify complex systems by
+focusing on relevant details for a given task while ignoring
+unnecessary information.
+
