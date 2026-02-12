@@ -1,6 +1,11 @@
 # let's build a guess number game :
 import random
 
+easy_message = (
+   "I'm thinking of a number (1-10)! "
+   "Try to guess the number: "
+)
+
 
 def show_attempts(num):
     print(f"You have {num} attempts left")
@@ -11,7 +16,12 @@ def play():
         remaining_attempts = 3
         secret_number = random.randint(1, 10)
         show_attempts(remaining_attempts)
-        user_guess = int(input("I'm thinking of a number (1-10)! Try to guess the number: "))
+        while True:
+            try:
+                user_guess = int(input(easy_message))
+                break
+            except ValueError:
+                print('Please enter valid number!')
         while user_guess != secret_number and remaining_attempts > 1:
             remaining_attempts -= 1
             show_attempts(remaining_attempts)
