@@ -2,20 +2,11 @@
 import random
 
 
-max_range = [10, 50, 100]
-message = [(
-   "I'm thinking of a number (1-10)! "
-   "Try to guess the number: "
-    ),
-    (
-        "I'm thinking of a number (1-50)! "
-    "Try to guess the number: "
-    ),
-    (
-        "I'm thinking of a number (1-100)! "
-        "Try to guess the number: "
-    )
-]
+levels = {
+    1: {"range": 10, "message": "I'm thinking of a number (1-10)!"},
+    2: {"range": 50, "message": "I'm thinking of a number (1-50)!"},
+    3: {"range": 100, "message": "I'm thinking of a number (1-100)!"},
+}
 
 
 def dificilty_level():
@@ -30,14 +21,14 @@ def show_attempts(num):
     print(f"You have {num} attempts left")
 
 
-def play():
+def play(level):
     while True:
         remaining_attempts = 3
-        secret_number = random.randint(1, max_range[level - 1])
+        secret_number = random.randint(1, levels[level]['range'])
         show_attempts(remaining_attempts)
         while True:
             try:
-                user_guess = int(input(message[level - 1]))
+                user_guess = int(input(f"{levels[level]['message']} try to guess the number: "))
                 break
             except ValueError:
                 print('Please enter valid number!')
@@ -59,8 +50,8 @@ def play():
 
 
 if __name__ == "__main__":
+    level = 1
     while True:
-        level = 1
         print('='*34)
         print('|  Welcome to guess number Game  |')
         print('|  1: start game                 |')
