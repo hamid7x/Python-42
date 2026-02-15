@@ -6,13 +6,8 @@ class Plant:
         self.name = name
         self.height = height
         self.age = age
-
-    def create_plant(self):
-        name = self.name
-        height = self.height
-        age = self.age
-        print(f"Created: {name} ({height}cm, {age} days)")
         Plant.counter += 1
+        print(f"Created: {name} ({height}cm, {age} days)")
 
 
 if __name__ == "__main__":
@@ -29,5 +24,4 @@ if __name__ == "__main__":
         height = plants_data[i]['height']
         age = plants_data[i]['age']
         plant = Plant(name, height, age)
-        plant.create_plant()
     print(f"\nTotal plants created: {Plant.counter}")
