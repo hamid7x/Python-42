@@ -8,7 +8,8 @@ class SecurePlant:
 
     def set_height(self, height: int) -> None:
         if height < 0:
-            print(f"\nInvalid operation attempted: height {height}cm [REJECTED]")
+            print()
+            print(f"Invalid operation attempted: height {height}cm [REJECTED]")
             print('Security: Negative height rejected\n')
         else:
             self.__height = height
