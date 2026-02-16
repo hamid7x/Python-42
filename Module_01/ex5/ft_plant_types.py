@@ -10,7 +10,7 @@ class Flower(Plant):
         self.color = color
         super().__init__(name, height, age)
 
-    def bloom(self):
+    def bloom(self) -> None:
         print(f"{self.name} is blooming beautifully!")
 
 
@@ -21,9 +21,9 @@ class Tree(Plant):
         self.trunk_diameter = trunk_diameter
         super().__init__(name, height, age)
 
-    def produce_shade(self):
+    def produce_shade(self) -> None:
         shade = (self.trunk_diameter**2 * 3.14) / 100
-        print(f"{self.name} provides {int(shade)} square meters of shade")
+        print(f"{self.name} provides {shade:.0f} square meters of shade")
 
 
 class Vegetable(Plant):
@@ -44,7 +44,8 @@ if __name__ == "__main__":
     print("=== Garden Plant Types ===")
     print()
     flower1 = Flower("Rose", 25, 30, "red")
-    flower2 = Flower("Sunflower", 80, 45, "yellow")
+    tree1 = Tree("Oak", 500, 1825, 50)
+    veg1 = Vegetable("Tomato", 80, 90, "summer", "C")
     print(
         f"{flower1.name} (Flower): {flower1.height}cm, "
         f"{flower1.age} days, {flower1.color} color"
@@ -52,34 +53,32 @@ if __name__ == "__main__":
     flower1.bloom()
     print()
     print(
-        f"{flower2.name} (Flower): {flower2.height}cm, "
-        f"{flower2.age} days, {flower2.color} color"
-    )
-    flower2.bloom()
-    print()
-
-    tree1 = Tree("Oak", 500, 1825, 50)
-    tree2 = Tree("Maple", 400, 1500, 40)
-    print(
         f"{tree1.name} (Tree): {tree1.height}cm, "
         f"{tree1.age} days, {tree1.trunk_diameter}cm diameter"
     )
     tree1.produce_shade()
     print()
     print(
-        f"{tree2.name} (Tree): {tree2.height}cm, "
-        f"{tree2.age} days, {tree2.trunk_diameter}cm diameter"
-    )
-    tree2.produce_shade()
-    print()
-
-    veg1 = Vegetable("Tomato", 80, 90, "summer", "C")
-    veg2 = Vegetable("Carrot", 30, 70, "autumn", "A")
-    print(
         f"{veg1.name} (Vegetable): {veg1.height}cm, "
         f"{veg1.age} days, {veg1.harvest_season} harvest"
     )
     print(f"{veg1.name} is rich in vitamin {veg1.nutritional_value}")
+    print()
+
+    flower2 = Flower("Sunflower", 80, 45, "yellow")
+    tree2 = Tree("Maple", 400, 1500, 40)
+    veg2 = Vegetable("Carrot", 30, 70, "autumn", "A")
+    print(
+        f"{flower2.name} (Flower): {flower2.height}cm, "
+        f"{flower2.age} days, {flower2.color} color"
+    )
+    flower2.bloom()
+    print()
+    print(
+        f"{tree2.name} (Tree): {tree2.height}cm, "
+        f"{tree2.age} days, {tree2.trunk_diameter}cm diameter"
+    )
+    tree2.produce_shade()
     print()
     print(
         f"{veg2.name} (Vegetable): {veg2.height}cm, "
