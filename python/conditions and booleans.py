@@ -12,9 +12,9 @@ elif language == 'Java':
 else:
     print('No match')
 
-# the difference between == and is : 
+# the difference between == and is :
 # == : checking values if they are equall
-# is : checking is they are same object in memmory not only the values are equal
+# is : checking is they are same object in memmory
 
 a = [1, 2, 3]
 b = [1, 2, 3]
