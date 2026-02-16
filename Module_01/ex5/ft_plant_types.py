@@ -11,7 +11,7 @@ class Flower(Plant):
         super().__init__(name, height, age)
 
     def bloom(self):
-        print(f"{self.name} is blooming beautifully!\n")
+        print(f"{self.name} is blooming beautifully!")
 
 
 class Tree(Plant):
@@ -23,7 +23,7 @@ class Tree(Plant):
 
     def produce_shade(self):
         shade = (self.trunk_diameter**2 * 3.14) / 100
-        print(f"{self.name} provides {int(shade)} square meters of shade\n")
+        print(f"{self.name} provides {int(shade)} square meters of shade")
 
 
 class Vegetable(Plant):
@@ -41,7 +41,8 @@ class Vegetable(Plant):
 
 
 if __name__ == "__main__":
-    print("=== Garden Plant Types ===\n")
+    print("=== Garden Plant Types ===")
+    print()
     flower1 = Flower("Rose", 25, 30, "red")
     flower2 = Flower("Sunflower", 80, 45, "yellow")
     print(
@@ -49,11 +50,13 @@ if __name__ == "__main__":
         f"{flower1.age} days, {flower1.color} color"
     )
     flower1.bloom()
+    print()
     print(
         f"{flower2.name} (Flower): {flower2.height}cm, "
         f"{flower2.age} days, {flower2.color} color"
     )
     flower2.bloom()
+    print()
 
     tree1 = Tree("Oak", 500, 1825, 50)
     tree2 = Tree("Maple", 400, 1500, 40)
@@ -62,19 +65,22 @@ if __name__ == "__main__":
         f"{tree1.age} days, {tree1.trunk_diameter}cm diameter"
     )
     tree1.produce_shade()
+    print()
     print(
         f"{tree2.name} (Tree): {tree2.height}cm, "
         f"{tree2.age} days, {tree2.trunk_diameter}cm diameter"
     )
     tree2.produce_shade()
+    print()
 
     veg1 = Vegetable("Tomato", 80, 90, "summer", "C")
-    veg2 = Vegetable("Carrot", 30, 70, "autum", "A")
+    veg2 = Vegetable("Carrot", 30, 70, "autumn", "A")
     print(
         f"{veg1.name} (Vegetable): {veg1.height}cm, "
         f"{veg1.age} days, {veg1.harvest_season} harvest"
     )
-    print(f"{veg1.name} is rich in vitamin {veg1.nutritional_value}\n")
+    print(f"{veg1.name} is rich in vitamin {veg1.nutritional_value}")
+    print()
     print(
         f"{veg2.name} (Vegetable): {veg2.height}cm, "
         f"{veg2.age} days, {veg2.harvest_season} harvest"
