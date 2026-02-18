@@ -34,13 +34,19 @@ class Stack:
     def peek(self):
         return self.items[-1]
 
+    def size(self):
+        return len(self.items)
+
 
 print("--------Class Method---------")
 s = Stack()
+print(s.size())
 s.push('A')
 s.push('B')
 s.push('C')
 
+print(s.size())
 print(s.peek())
 print(s.pop())
+print(s.size())
 print(s.items)
