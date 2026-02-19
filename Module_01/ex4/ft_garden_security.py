@@ -1,9 +1,11 @@
 class SecurePlant:
     def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name
-        self._height = height
-        self._age = age
+        self._height = 0
+        self._age = 0
         print(f"Plant created: {self.name}")
+        self.set_height(height)
+        self.set_age(height)
 
     def get_info(self) -> None:
         print(
@@ -13,8 +15,9 @@ class SecurePlant:
 
     def invalid_operation(self, op: str, val: int) -> None:
         temp = {'height': 'cm', 'age': ' days'}
-        print(f"Invalid operation attempted: {op} {val}{temp[op]} [REJECTED]")
-        print(f"Security: Negative {op} rejected")
+        print(f"\nInvalid operation attempted: {op} "
+              f"{val}{temp[op]} [REJECTED]")
+        print(f"Security: Negative {op} rejected\n")
 
     def get_height(self) -> int:
         return self._height
@@ -39,12 +42,7 @@ class SecurePlant:
 
 if __name__ == "__main__":
     print("=== Garden Security System ===")
-    plant = SecurePlant('plant', 20, 15)
-    plant.set_height(25)
-    plant.set_age(30)
-    print()
+    plant = SecurePlant('plant', 25, 30)
     plant.set_height(-5)
-    print()
     plant.set_age(-40)
-    print()
     plant.get_info()
