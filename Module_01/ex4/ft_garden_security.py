@@ -5,7 +5,7 @@ class SecurePlant:
         self._age = 0
         print(f"Plant created: {self.name}")
         self.set_height(height)
-        self.set_age(height)
+        self.set_age(age)
 
     def get_info(self) -> None:
         print(
