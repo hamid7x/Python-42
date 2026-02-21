@@ -6,7 +6,7 @@ class GardenManager:
 
     def add_garden(self, garden) -> None:
         self.gardens.append(garden)
-        self.total += 1
+        GardenManager.total += 1
 
     class GardenStats:
         def __init__(self, garden):
@@ -31,7 +31,7 @@ class GardenManager:
                 f"Total growth: {total_growth}cm"
                 )
             print(
-                  f"Plants types: {regular} regular, "
+                  f"Plant types: {regular} regular, "
                   f"{flowering} flowering, {prize} prize flowers"
                   )
 
@@ -82,7 +82,7 @@ class FloweringPlant(Plant):
         super().__init__(name, height, age)
         self.color = color
 
-    def get_info(self) -> None:
+    def get_info(self) -> str:
         parent_info = super().get_info()
         return f"{parent_info}, {self.color} flowers (blooming)"
 
@@ -102,7 +102,7 @@ class PrizeFlower(FloweringPlant):
         super().__init__(name, height, age, color)
         self.prize_point = prize_point
 
-    def get_info(self) -> None:
+    def get_info(self) -> str:
         parent_info = super().get_info()
         return f"{parent_info}, Prize points: {self.prize_point}"
 
