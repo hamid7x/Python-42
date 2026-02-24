@@ -30,8 +30,11 @@ class GardenManager:
                     flowering += 1
                 elif category == "prize":
                     prize += 1
+            total_plants = 0
+            for p in self.garden.plants:
+                total_plants += 1
             print(
-                f"Plants added: {len(self.garden.plants)}, "
+                f"Plants added: {total_plants}, "
                 f"Total growth: {total_growth}cm"
                 )
             print(
@@ -42,7 +45,7 @@ class GardenManager:
 
     def get_scores(self) -> None:
         print("Garden scores - ", end='')
-        i = len(self.gardens)
+        i = get_length(self.gardens)
         for g in self.gardens:
             score = 0
             i -= 1
@@ -54,7 +57,7 @@ class GardenManager:
         print()
 
     def total_gardens(gardens: list['Garden']) -> int:
-        return len(gardens)
+        return get_length(gardens)
     total_gardens = staticmethod(total_gardens)
 
 
@@ -132,6 +135,13 @@ class PrizeFlower(FloweringPlant):
 
     def get_category(self) -> str:
         return "prize"
+
+
+def get_length(data: list['Garden']) -> int:
+    length = 0
+    for p in data:
+        length += 1
+    return length
 
 
 def validate_height(garden: 'Garden') -> bool:
