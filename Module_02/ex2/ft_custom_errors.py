@@ -10,7 +10,7 @@ class WaterError(GardenError):
     pass
 
 
-def custom_plant_error(name: str, temp: int) -> None:
+def custom_plant_errors(name: str, temp: int) -> None:
     plants = ['carrot', 'tomato', 'potato', 'rose', 'sunflower']
     if name not in plants:
         raise PlantError('Invalid plant name!')
@@ -20,17 +20,17 @@ def custom_plant_error(name: str, temp: int) -> None:
         raise PlantError(f"Temperature for {name} is too low!")
 
 
-def custom_water_error(tank_level: int):
+def custom_water_errors(tank_level: int):
     if tank_level < 0:
         raise WaterError("Invalid input tank level can't be negative")
     if tank_level < 40:
         raise WaterError('Not enough water in the tank!')
 
 
-def test_custom_error():
+def test_custom_errors():
     print('Testing PlantError...')
     try:
-        custom_plant_error('tomato', 70)
+        custom_plant_errors('carrot', -70)
     except PlantError as e:
         print(f'{e}\n')
     except Exception as e:
@@ -38,7 +38,7 @@ def test_custom_error():
 
     print('Testing WaterError...')
     try:
-        custom_water_error(20)
+        custom_water_errors(20)
     except WaterError as e:
         print(f'{e}\n')
     except Exception as e:
@@ -46,14 +46,14 @@ def test_custom_error():
 
     print('Testing catching all garden errors...')
     try:
-        custom_plant_error('carrot', 80)
+        custom_plant_errors('tomato', 80)
     except GardenError as e:
         print(f'Caught a garden error: {e}')
     except Exception as e:
         print(e)
 
     try:
-        custom_water_error(30)
+        custom_water_errors(30)
     except GardenError as e:
         print(f'Caught a garden error: {e}')
     except Exception as e:
@@ -64,4 +64,4 @@ def test_custom_error():
 
 if __name__ == "__main__":
     print("=== Custom Garden Errors Demo ===\n")
-    test_custom_error()
+    test_custom_errors()
