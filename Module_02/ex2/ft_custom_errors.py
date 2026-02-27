@@ -18,12 +18,12 @@ def custom_plant_errors(name: str) -> None:
         raise PlantError(f"The {name} plant is wilting!")
 
 
-def custom_water_errors(tank_level: int):
+def custom_water_errors(tank_level: int) -> None:
     if tank_level <= 0:
         raise WaterError('Not enough water in the tank!')
 
 
-def test_custom_errors():
+def test_custom_errors() -> None:
     print('Testing PlantError...')
     try:
         custom_plant_errors('tomato')
