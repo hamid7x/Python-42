@@ -1,4 +1,8 @@
-def check_plant_health(plant_name: str, water_level: int, sunlight_hours: int) -> str:
+def check_plant_health(
+        plant_name: str,
+        water_level: int,
+        sun_hours: int) -> str:
+
     if not plant_name:
         raise ValueError('Error: Plant name cannot be empty!\n')
     if water_level > 10:
@@ -7,12 +11,12 @@ def check_plant_health(plant_name: str, water_level: int, sunlight_hours: int) -
     if water_level < 1:
         raise ValueError(
             f'Error: water level {water_level} is too low (min 1)\n')
-    if sunlight_hours > 12:
+    if sun_hours > 12:
         raise ValueError(
-            f'Error: Sunlight hours {sunlight_hours} is too high (max 12)\n')
-    if sunlight_hours < 2:
+            f'Error: Sunlight hours {sun_hours} is too high (max 12)\n')
+    if sun_hours < 2:
         raise ValueError(
-            f'Error: Sunlight hours {sunlight_hours} is too low (min 2)\n')
+            f'Error: Sunlight hours {sun_hours} is too low (min 2)\n')
 
     return f"Plant '{plant_name}' is healthy!\n"
 
