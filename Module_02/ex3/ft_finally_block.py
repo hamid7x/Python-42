@@ -1,18 +1,18 @@
 def water_plants(plant_list: list[str]) -> None:
     print('Opening watering system')
-    valid = False
+    completed = False
     try:
         for plant in plant_list:
             if not plant or plant.__class__.__name__ != 'str':
                 raise ValueError(
                      f'Error: Cannot water {plant} - invalid plant!')
             print(f"Watering {plant}")
-        valid = True
+        completed = True
     except ValueError as e:
         print(e)
     finally:
         print('Closing watering system (cleanup)')
-    if valid:
+    if completed:
         print('Watering completed successfully!')
 
 
