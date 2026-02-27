@@ -18,7 +18,7 @@ class Plant:
 
 
 class GardenManager:
-    def __init__(self):
+    def __init__(self) -> None:
         self.plants = []
         self.water_tank = 10
 
@@ -44,7 +44,7 @@ class GardenManager:
                 self,
                 plant_name: str,
                 water_level: int,
-                sun_hours: int) -> None:
+                sun_hours: int) -> str:
         if water_level > 10:
             raise WaterError(f'Water level {water_level} is too high (max 10)')
         if water_level < 1:
@@ -54,13 +54,13 @@ class GardenManager:
                 f'sunlight hours {sun_hours} is too high (max 12)')
         if sun_hours < 0:
             raise PlantError(f'sunlight hours {sun_hours} is too low (min 0)')
-            
+
         return (
              f'{plant_name}: healthy '
              f'(water: {water_level}, sun: {sun_hours})')
 
 
-def test_garden_management():
+def test_garden_management() -> None:
     print('Adding plants to garden...')
     plants_to_add = [
         ('tomato', '5', '8'),
