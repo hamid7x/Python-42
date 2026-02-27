@@ -1,13 +1,16 @@
 class GardenError(Exception):
-    pass
+    def __init__(self, message: str = 'Garden Error!') -> None:
+        super().__init__(message)
 
 
 class PlantError(GardenError):
-    pass
+    def __init__(self, message: str = 'Plant Error!') -> None:
+        super().__init__(message)
 
 
 class WaterError(GardenError):
-    pass
+    def __init__(self, message: str = 'Water Error!') -> None:
+        super().__init__(message)
 
 
 class Plant:
