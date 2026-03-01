@@ -24,7 +24,7 @@ def check_plant_health(
 def test_plant_checks() -> None:
     print('Testing good values...')
     try:
-        check_plant_health('tomato', 5, 7)
+        print(check_plant_health('tomato', 5, 7))
     except ValueError as e:
         print(e)
     except Exception as e:
@@ -48,7 +48,7 @@ def test_plant_checks() -> None:
 
     print('Testing bad sunlight hours...')
     try:
-        print(check_plant_health('tomato', 6, 0))
+        check_plant_health('tomato', 6, 0)
     except ValueError as e:
         print(e)
     except Exception as e:
