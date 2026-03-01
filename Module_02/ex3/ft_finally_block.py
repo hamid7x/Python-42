@@ -28,7 +28,7 @@ def test_watering_system() -> None:
     except Exception as e:
         print(e)
     finally:
-        print('\ncleanup always happens, even with errors!')
+        print('\nCleanup always happens, even with errors!')
 
 
 if __name__ == "__main__":
