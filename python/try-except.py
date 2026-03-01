@@ -9,7 +9,7 @@ print(age)
 try:
     age_1 = int(input('Enter your age: '))
     print('You are', age_1)
-except:
+except Exception:
     print('Please enter a valid number!')
 
 # more professional way to use try/except
