@@ -43,7 +43,6 @@ if __name__ == "__main__":
         print(f'Error parsing coords: {e}')
         print(
             f'Error details - Type: {type(e).__name__}, Args: ("{message}",)')
-        print(type(e))
 
     if parsed_pos:
         print('\nUnpacking demonstration:')
