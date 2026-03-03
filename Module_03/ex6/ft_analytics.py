@@ -4,31 +4,30 @@ players_data = [
         'achievements':
             {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon',
              'collector'},
-            'region': 'north'
+        'region': 'north'
     },
     {
         'name': 'bob', 'score': 1800, 'active': True,
-        'achievements':
-            {'first_kill', 'level_10', 'boss_slayer'},
-            'region': 'east'
+        'achievements': {'first_kill', 'level_10', 'boss_slayer'},
+        'region': 'east'
     },
     {
         'name': 'charlie', 'score': 2150, 'active': True,
-        'achievements':
-            {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon',
-             'collector', 'perfectionist', 'boss_slayer'},
-            'region': 'central'
+        'achievements': {
+            'first_kill', 'level_10', 'treasure_hunter', 'speed_demon',
+            'collector', 'perfectionist', 'boss_slayer'
+        },
+        'region': 'central'
     },
     {
         'name': 'diana', 'score': 2050, 'active': False,
-        'achievements':
-            {'first_kill', 'level_10'},
-            'region': 'west'
+        'achievements': {'first_kill', 'level_10'},
+        'region': 'west'
     },
     ]
 
 
-def list_comprehension(players_data):
+def list_comprehension(players_data: list[dict]) -> None:
     high_scores = [p['name'] for p in players_data if p['score'] > 2000]
     score_double = [p['score'] * 2 for p in players_data]
     active_player = [p['name'] for p in players_data if p['active']]
@@ -38,9 +37,9 @@ def list_comprehension(players_data):
     print(f'Active players: {active_player}')
 
 
-def dictionary_comprehension(players_data: list[list]) -> None:
+def dictionary_comprehension(players_data: list[dict]) -> None:
     categories_ranges = {
-        'high': (2000, 4000),
+        'high': (2000, 9000),
         'medium': (2000, 2200),
         'low': (0, 2000)
     }
@@ -56,11 +55,11 @@ def dictionary_comprehension(players_data: list[list]) -> None:
                           for p in players_data if p['active']}
 
     print(f'Player scores: {player_score}')
-    print(f'Score categorires: {score_categories}')
+    print(f'Score categories: {score_categories}')
     print(f'Achievements counts: {achievement_counts}')
 
 
-def set_comprehension(players_data: int) -> None:
+def set_comprehension(players_data: list[dict]) -> None:
     unique_players = {d['name'] for d in players_data}
     unique_achievements = {
         achievement
@@ -74,24 +73,26 @@ def set_comprehension(players_data: int) -> None:
     print(f'Active regions: {active_region}')
 
 
-def combined_analysis(players_data) -> None:
+def combined_analysis(players_data: list[dict]) -> None:
     unique_achievements = {
         achievement
         for p in players_data
         for achievement in p['achievements']
         }
-    averge_score = sum(p['score'] for p in players_data) / len(players_data)
+    average_score = sum(p['score'] for p in players_data) / len(players_data)
     max_score = max(p['score'] for p in players_data)
     top_performers = [p for p in players_data if p['score'] == max_score]
     print(f'Total players: {len(players_data)}')
-    print(f'Total unique achievement: {len(unique_achievements)}')
-    print(f'Average score: {averge_score}')
+    print(f'Total unique achievements: {len(unique_achievements)}')
+    print(f'Average score: {average_score}')
+    print('Top performer: ', end='')
     for p in top_performers:
         print(
-            f"Top performer: {p['name']} "
-            f"({p['score']} points, "
-            f"{len(p['achievements'])} achievements)"
+              f" {p['name']} ({p['score']} points, "
+              f"{len(p['achievements'])} achievements)",
+              end=' '
             )
+    print()
 
 
 if __name__ == "__main__":
