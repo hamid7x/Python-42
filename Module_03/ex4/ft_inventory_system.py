@@ -26,11 +26,12 @@ def split_arg(arg: str) -> tuple[str, int]:
     return (item, quantity)
 
 
-def process_inventory(args: list[str]) -> list[dict]:
+def process_inventory(args: list[str]) -> dict[str, int]:
     if len(args) == 0:
-        raise ValueError(
+        print(
             'No items provided. Usage: python3 '
             'ft_inventory_system.py <item:quantity> <item:quantity> ...')
+        return {}
     inventory = {}
     for arg in args:
         try:
@@ -41,30 +42,29 @@ def process_inventory(args: list[str]) -> list[dict]:
     return inventory
 
 
-def get_total_items(inventory: dict) -> int:
+def get_total_items(inventory: dict[str, int]) -> int:
     total_items = 0
     for item in inventory.values():
         total_items += item
     return total_items
 
 
-def inventory_items(inventory: dict):
-    total_items = get_total_items(inventory)
+def inventory_items(inventory: dict[str, int], total_items: int) -> None:
     if total_items == 0:
-        raise ValueError('No valid inventory items.')
+        print('No valid inventory items.')
+        return
 
     print(f'Total items in inventory: {total_items}')
     print(f'Unique item types: {len(inventory.keys())}')
 
 
-def display_inventory_items(inventory: dict) -> None:
-    total_items = get_total_items(inventory)
+def display_inventory_items(inventory: dict[str, int], total: int) -> None:
     for key, value in inventory.items():
         print(
-            f'{key}: {value} units ({value / total_items * 100:.1f}%)')
+            f'{key}: {value} units ({value / total * 100:.1f}%)')
 
 
-def inventory_stats(inventory: dict) -> None:
+def inventory_stats(inventory: dict[str, int]) -> None:
     first_item = True
     for key, value in inventory.items():
         if first_item:
@@ -84,7 +84,7 @@ def inventory_stats(inventory: dict) -> None:
     print(f'Least abundant: {least_key} ({least_value} units)')
 
 
-def item_categories(inventory: dict) -> None:
+def item_categories(inventory: dict[str, int]) -> None:
     categories = {
         "abundant": {},
         "moderate": {},
@@ -108,7 +108,7 @@ def item_categories(inventory: dict) -> None:
         print(f"{names[category]}: {categories[category]}")
 
 
-def suggestions_management(inventory: dict) -> None:
+def suggestions_management(inventory: dict[str, int]) -> None:
     restock = []
     for item, value in inventory.items():
         if value < 2:
@@ -117,11 +117,11 @@ def suggestions_management(inventory: dict) -> None:
     print(*restock, sep=', ')
 
 
-def dictionary_demo(inventory: dict) -> None:
+def dictionary_demo(inventory: dict[str, int]) -> None:
     print('Dictionary keys: ', end='')
     print(*inventory.keys(), sep=', ')
     print('Dictionary values: ', end='')
-    print(*(inventory.values()), sep=', ')
+    print(*inventory.values(), sep=', ')
     lookup = 'sword'
     print(f"Sample lookup - '{lookup}' in inventory: ", end='')
     if inventory.get(lookup) is None:
@@ -134,22 +134,24 @@ if __name__ == "__main__":
     print('=== Inventory System Analysis ===')
     try:
         inventory = process_inventory(sys.argv[1:])
+        if inventory:
+            total_items = get_total_items(inventory)
+            inventory_items(inventory, total_items)
 
-        inventory_items(inventory)
+            if total_items:
+                print('\n=== Current Inventory ===')
+                display_inventory_items(inventory, total_items)
 
-        print('\n=== Current Inventory ===')
-        display_inventory_items(inventory)
+                print('\n=== Inventory Statistics ===')
+                inventory_stats(inventory)
 
-        print('\n=== Inventory Statistics ===')
-        inventory_stats(inventory)
+                print('\n=== Item Categories ===')
+                item_categories(inventory)
 
-        print('\n=== Item Categories ===')
-        item_categories(inventory)
+                print('\n=== Management Suggestions ===')
+                suggestions_management(inventory)
 
-        print('\n=== Management Suggestions ===')
-        suggestions_management(inventory)
-
-        print('\n=== Dictionary Properties Demo ===')
-        dictionary_demo(inventory)
+                print('\n=== Dictionary Properties Demo ===')
+                dictionary_demo(inventory)
     except Exception as e:
         print(e)
