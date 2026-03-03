@@ -1,4 +1,7 @@
-def fibonacci_gen(n: int):
+import typing
+
+
+def fibonacci_gen(n: int) -> typing.Generator[int, None, None]:
     a, b = 0, 1
     while n:
         yield a
@@ -15,7 +18,7 @@ def is_prime(n: int) -> bool:
     return True
 
 
-def prime_gen(n: int):
+def prime_gen(n: int) -> typing.Generator[int, None, None]:
     i = 2
     while n:
         if is_prime(i):
@@ -24,7 +27,9 @@ def prime_gen(n: int):
         i += 1
 
 
-def display_output(operation, value: int) -> None:
+def display_output(operation: typing.Callable[[int],
+                   typing.Generator[int, None, None]],
+                   value: int) -> None:
     first = True
     for nb in operation(value):
         if first:
@@ -34,23 +39,25 @@ def display_output(operation, value: int) -> None:
             print(f', {nb}', end='')
     print()
 
-
-def game_event_gen(events_nb: int):
+def convert_to_int(num: str) -> int:
+    loockup = '0123456789'
+    for s in num:
+        
+def generate_random_nb():
+    numbers = {f'{i}' for i in range(1, 40)}
+    nb = convert_to_int(numbers)
+    
+def game_event_gen(events_nb: int) -> typing.Generator[tuple, None, None]:
     players = ['alice', 'bob', 'charlie']
     events = ['killed monster', 'found treasure', 'leveled up']
-    n = 1
+
     seed = 7
     for i in range(1, events_nb + 1):
         player = players[(seed * i - 1) % len(players)]
         event = events[(seed * i - 1) % len(events)]
         level = (seed * i - 1) % 20
-        yield (
-            n,
-            player,
-            event,
-            level
-        )
-        n += 1
+
+        yield (i, player, event, level)
 
 
 if __name__ == "__main__":
@@ -61,17 +68,18 @@ if __name__ == "__main__":
     high_level = 0
     treasure_event = 0
     levelup_event = 0
-    for i, p, e, l in game_event_gen(total_event):
+    for i, player, event, level in game_event_gen(total_event):
         if i < 4:
-            print(f'Event {i}: Player {p} (level {l}) {e}')
+            print(f'Event {i}: Player {player} (level {level}) {event}')
         if i == 4:
-            print('...\n')
-        if l >= 10:
+            print('...')
+        if level >= 10:
             high_level += 1
-        if e == 'found treasure':
+        if event == 'found treasure':
             treasure_event += 1
-        if e == 'leveled up':
+        if event == 'leveled up':
             levelup_event += 1
+    print()
 
     print('=== Stream Analytics ===')
     print(f'Total events processed: {total_event}')
