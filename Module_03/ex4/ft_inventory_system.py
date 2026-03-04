@@ -16,13 +16,14 @@ def split_arg(arg: str) -> tuple[str, int]:
     for c in quantity:
         if c == ':':
             raise ValueError(f"Invalid format: '{arg}'")
-
     try:
         quantity = int(quantity)
     except ValueError:
         raise ValueError(f"Invalid quantity: '{arg}'")
+
     if quantity < 0:
         raise ValueError(f"Invalid quantity: '{arg}'")
+
     return (item, quantity)
 
 
