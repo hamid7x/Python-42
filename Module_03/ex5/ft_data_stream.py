@@ -40,35 +40,14 @@ def display_output(operation: typing.Callable[[int],
     print()
 
 
-def convert_to_int(n: str) -> int:
-    loockup = '0123456789'
-    num = 0
-    for s in n:
-        digit = 0
-        for i in loockup:
-            if s == i:
-                break
-            digit += 1
-
-        num = num * 10 + digit
-    return num
-
-
-def generate_random_nb() -> int:
-    numbers = {f'{i}' for i in range(1, 40)}
-    nb = convert_to_int([*numbers][0])
-    return nb
-
-
 def game_event_gen(events_nb: int) -> typing.Generator[tuple, None, None]:
     players = ['alice', 'bob', 'charlie']
     events = ['killed monster', 'found treasure', 'leveled up']
 
-    seed = generate_random_nb()
     for i in range(1, events_nb + 1):
-        player = players[(seed * i - 1) % len(players)]
-        event = events[(seed * i - 1) % len(events)]
-        level = (seed * i - 1) % 20
+        player = players[i % len(players)]
+        event = events[i % len(events)]
+        level = i * 7 % 20
 
         yield (i, player, event, level)
 
@@ -77,7 +56,7 @@ if __name__ == "__main__":
     print('=== Game Data Stream Processor ===\n')
 
     print('Processing 1000 game events...\n')
-    total_event = 10
+    total_event = 1000
     high_level = 0
     treasure_event = 0
     levelup_event = 0
@@ -111,5 +90,3 @@ if __name__ == "__main__":
     prime_n = 5
     print(f'Prime numbers (first {prime_n}): ', end='')
     display_output(prime_gen, prime_n)
-    
-    generate_random_nb()
