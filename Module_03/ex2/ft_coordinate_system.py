@@ -2,7 +2,8 @@ import math
 
 
 def calc_distance(position: tuple[float, float, float],
-                  origin: tuple[float, float, float]) -> None:
+                  origin: tuple[float, float, float]
+                  ) -> None:
     x0, y0, z0 = origin
     x, y, z = position
 
@@ -26,8 +27,8 @@ if __name__ == "__main__":
     parsed_pos = None
     try:
         x, y, z = coords.split(',')
-        x, y, z = (int(x), int(y), int(z))
-        parsed_pos = (x, y, z)
+        px, py, pz = (int(x), int(y), int(z))
+        parsed_pos = (px, py, pz)
         print(f'Parsed position: {parsed_pos}')
         calc_distance(parsed_pos, origin)
     except Exception as e:
@@ -40,7 +41,7 @@ if __name__ == "__main__":
         x, y, z = (int(x), int(y), int(z))
     except Exception as e:
         message, = e.args
-        print(f'Error parsing coords: {e}')
+        print(f'Error parsing coordinates: {e}')
         print(
             f'Error details - Type: {type(e).__name__}, Args: ("{message}",)')
 
