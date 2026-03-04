@@ -1,10 +1,12 @@
 import sys
 
 
-def process_scores(args: list[str]) -> list[int]:
+def process_scores(args: list[str]) -> list[int] | None:
     if len(args) == 0:
-        raise ValueError('No scores provided. Usage: '
-                         'python3 ft_score_analytics.py <score1> <score2> ...')
+        print('No scores provided. Usage: '
+              'python3 ft_score_analytics.py <score1> <score2> ...')
+        return None
+
     scores = []
     for arg in args:
         try:
@@ -22,12 +24,13 @@ if __name__ == "__main__":
 
     try:
         scores = process_scores(sys.argv[1:])
-        print(f'Scores processed: {scores}')
-        print(f'Total players: {len(scores)}')
-        print(f'Total score: {sum(scores)}')
-        print(f'Average score: {sum(scores) / len(scores)}')
-        print(f'High score: {max(scores)}')
-        print(f'Low score: {min(scores)}')
-        print(f'Score range: {max(scores) - min(scores)}')
+        if scores:
+            print(f'Scores processed: {scores}')
+            print(f'Total players: {len(scores)}')
+            print(f'Total score: {sum(scores)}')
+            print(f'Average score: {sum(scores) / len(scores)}')
+            print(f'High score: {max(scores)}')
+            print(f'Low score: {min(scores)}')
+            print(f'Score range: {max(scores) - min(scores)}')
     except Exception as e:
         print(e)
