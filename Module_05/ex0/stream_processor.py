@@ -75,8 +75,7 @@ class LogProcessor(DataProcessor):
         return True
 
 
-if __name__ == "__main__":
-    print('=== CODE NEXUS - DATA PROCESSOR FOUNDATION ===\n')
+def demo_individual() -> None:
     print('Initializing Numeric Processor...')
     processor = NumericProcessor()
     data = [1, 2, 3, 4, 5]
@@ -113,11 +112,20 @@ if __name__ == "__main__":
         print('Validation: Log entry not verified')
     print(processor.format_output(result))
 
-    print('\n=== Polymorphic Processing Demo ===\n')
+
+def demo_polymorphic() -> None:
     print('Processing multiple data types through same interface...')
     data = [[1, 2, 3], 'Hello Nexus', 'INFO level detected: System ready']
     processors = [NumericProcessor(), TextProcessor(), LogProcessor()]
     for i, processor in enumerate(processors):
         result = processor.process(data[i])
         print(f"Result {i + 1}: {result}")
+
+
+if __name__ == "__main__":
+    print('=== CODE NEXUS - DATA PROCESSOR FOUNDATION ===\n')
+    demo_individual()
+
+    print('\n=== Polymorphic Processing Demo ===\n')
+    demo_polymorphic()
     print('\nFoundation systems online. Nexus ready for advanced streams.')
