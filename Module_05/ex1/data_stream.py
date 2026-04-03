@@ -78,20 +78,50 @@ class SensorStream(DataStream):
             "lowest_temp_recorded": self.lowest_temp_recorded or 0
         }
 
+
 class TransactionStream(DataStream):
     def __init__(self, stream_id: str) -> None:
         self.stream_id = stream_id
         self.stream_type = "Financial Data"
+
     def process_batch(self, data_batch: List[Any]) -> str:
-        pass
+        print(f'Stream ID: {self.stream_id}, type: {self.stream_type}')
+        data = ''
+        for item in data_batch:
+            key, val = item
+            data += f'{key}:{val}, '
+        print(data)
+        print(f'Processing transaction batch: {data_batch}')
+        total_operation = len(data_batch)
+        units = 0
+        for item in data_batch:
+            try:
+                key, unit = item.split(':', 1)
+                units += int(unit)
+            except ValueError:
+                continue
+        return (f'Transaction analysis: {total_operation}, '
+                f"net flow: +{units} units")
+
 
 class EventStream(DataStream):
     def __init__(self, stream_id: str) -> None:
         self.stream_id = stream_id
         self.stream_type = "System Events"
+
     def process_batch(self, data_batch: List[Any]) -> str:
         pass
 
+
 if __name__ == "__main__":
     print('=== CODE NEXUS - POLYMORPHIC STREAM SYSTEM ===\n')
-    
+    print('Initializing Sensor Stream...')
+    data = ['temp:22.5', 'humidity:65', 'pressure:1013']
+    stream = SensorStream(' SENSOR_001')
+    output = stream.process_batch(data)
+    print(output)
+    print('\nInitializing Transaction Stream...')
+    data = [{'buy': 100}, {'sell': 150}, {'buy': 75}]
+    stream = TransactionStream(' TRANS_001')
+    output = stream.process_batch(data)
+    print(output)
