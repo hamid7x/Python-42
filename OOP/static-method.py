@@ -17,6 +17,7 @@ emp1 = Employee('Spongebob', 'Cook')
 emp2 = Employee('Eugune', 'Manager')
 emp3 = Employee('Squidward', 'Cashier')
 
+
 print(Employee.is_valid_position('Cook'))  # True
 print(Employee.is_valid_position('Rocket Scientist'))  # False
 
