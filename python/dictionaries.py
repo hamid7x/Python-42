@@ -27,7 +27,6 @@ print(student.items())  # return dictionay pair key-value
 
 print(student)
 
-
 # looping through keys
 for key in student:
     print(key)
@@ -35,3 +34,4 @@ for key in student:
 # looping through keys and values
 for key, value in student.items():
     print(key, value)
+
