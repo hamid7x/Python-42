@@ -89,6 +89,7 @@ When you write ValueError('invalid data'):
 3. Python goes up again to BaseException — found __init__! So it runs:
 pythondef __init__(self, *args):
     self.args = ('invalid data',)  # stores your message
-So pass just means — don't add anything new, just use whatever the parent class has.
+So pass just means — don't add anything new, just use
+whatever the parent class has.
 The message still gets stored because BaseException.__init__ handles it!
 """
