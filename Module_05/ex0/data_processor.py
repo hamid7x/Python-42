@@ -3,9 +3,9 @@ from typing import Any
 
 
 class DataProcessor(ABC):
-    def __init__(self):
-        self.position = 0
-        self.processedData = []
+    def __init__(self) -> None:
+        self.position: int = 0
+        self.processedData: list[tuple[int, str]] = []
 
     @abstractmethod
     def validate(self, data: Any) -> bool:
@@ -99,7 +99,7 @@ class LogProcessor(DataProcessor):
             return True
         return False
 
-    def ingest(self, data: dict | list[dict]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if self.validate(data):
             data = data if isinstance(data, list) else [data]
             for d in data:
@@ -112,7 +112,7 @@ class LogProcessor(DataProcessor):
             raise ValueError('Got exception: Improper log data')
 
 
-def proccessing_numeric_data() -> None:
+def processing_numeric_data() -> None:
     processor = NumericProcessor()
     data_one = '42'
     print(f"Trying to validate input '{data_one}': "
@@ -155,7 +155,7 @@ def processing_text_data() -> None:
         print(e)
 
 
-def proccessing_logs_data() -> None:
+def processing_logs_data() -> None:
     processor = LogProcessor()
     data_one = 'Hello'
     print(f"Trying to validate input '{data_one}': "
@@ -176,8 +176,8 @@ def proccessing_logs_data() -> None:
 if __name__ == "__main__":
     print("=== Code Nexus - Data Processor ===\n")
     print('Testing Numeric Processor...')
-    proccessing_numeric_data()
+    processing_numeric_data()
     print('\nTesting Text Processor...')
     processing_text_data()
     print('\nTesting Log Processor...')
-    proccessing_logs_data()
+    processing_logs_data()
