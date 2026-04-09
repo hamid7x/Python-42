@@ -5,5 +5,5 @@ if __name__ == "__main__":
     print("Test import now - THIS WILL RAISE AN UNCAUGHT EXCEPTION")
 
     from alchemy.grimoire.dark_spellbook import dark_spell_record
-    result = dark_spell_record("Wisard", "test")
+    result = dark_spell_record("dark spell", "bats, frogs")
     print(result)
