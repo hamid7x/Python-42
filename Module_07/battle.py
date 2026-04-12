@@ -28,7 +28,7 @@ def testing_battle(factory_1: CreatureFactory,
 
 if __name__ == "__main__":
     flame_factory = FlameFactory()
-    aquabub_factory = AquaFactory()
+    aqua_factory = AquaFactory()
     testing_factory(flame_factory)
-    testing_factory(aquabub_factory)
-    testing_battle(flame_factory, aquabub_factory)
+    testing_factory(aqua_factory)
+    testing_battle(flame_factory, aqua_factory)
