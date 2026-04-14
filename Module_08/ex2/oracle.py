@@ -41,20 +41,20 @@ def display_config(config: dict) -> None:
 
 
 def check_hardcoded_secrets() -> bool:
+    keywords = [
+        'matrix_mode' + ' = "',
+        'matrix_mode' + " = '",
+        'api_key' + ' = "',
+        'api_key' + " = '",
+        'database_url' + ' = "',
+        'database_url' + " = '",
+        'log_level' + ' = "',
+        'log_level' + " = '",
+        'zion_endpoint' + ' = "',
+        'zion_endpoint' + " = '"
+    ]
     with open(__file__, 'r') as f:
         content = f.read()
-        keywords = [
-                'matrix_mode' + ' = "',
-                'matrix_mode' + " = '",
-                'api_key' + ' = "',
-                'api_key' + " = '",
-                'database_url' + ' = "',
-                'database_url' + " = '",
-                'log_level' + ' = "',
-                'log_level' + " = '",
-                'zion_endpoint' + ' = "',
-                'zion_endpoint' + ' = "',
-            ]
         for keyword in keywords:
             if keyword in content.lower():
                 return False
