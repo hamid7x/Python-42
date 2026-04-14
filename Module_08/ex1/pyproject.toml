@@ -3,14 +3,14 @@ name = "module-08"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Hamid Oukaamouch",email = "hamidkaamouch123@gmail.com"}
+    {name = "Hamid Oukaamouch",email = "hamid.oukaamouch@gmail.com"}
 ]
 requires-python = ">=3.10"
 dependencies = [
-    "requests (==2.31.0)",
-    "pandas (==2.1.0)",
-    "numpy (==1.25.0)",
-    "matplotlib (==3.7.2)"
+    "requests (>=2.31.0)",
+    "pandas (>=2.1.0)",
+    "numpy (>=1.25.0)",
+    "matplotlib (>=3.7.2)"
 ]
 
 

@@ -4,7 +4,7 @@ import sys
 
 API_URL = (
     "https://api.open-meteo.com/v1/forecast"
-    "?latitude=33.0&longitude=-7.0"
+    "?latitude=32.8811&longitude=-6.9063"
     "&hourly=temperature_2m"
     "&past_days=7&forecast_days=0"
 )
@@ -41,7 +41,10 @@ def fetch_api_data(url: str) -> list:
     requests = import_module('requests')
     response = requests.get(url)
     data = response.json()
-    temps = data['hourly']['temperature_2m']
+    try:
+        temps = data['hourly']['temperature_2m']
+    except KeyError:
+        print("Unexpected API response format.")
     return temps
 
 
@@ -51,19 +54,39 @@ def generate_matrix_data(temps: list) -> list:
 
 
 def analyse_matrix_data(temps):
+    print("\nAnalyzing Matrix data...")
+    print(f"Processing {len(temps)} data points...")
     pd = import_module("pandas")
     df = pd.DataFrame(temps, columns=["temperature"])
     return df
 
 
 def visualize_matrix_data(df):
+    print("Generating visualization...\n")
     ptl = import_module("matplotlib.pyplot")
-    ptl.plot(df["temperature"])
+    ptl.figure(figsize=(10, 5))
     ptl.title("Matrix Temperature Data")
-    ptl.xlabel("Time")
-    ptl.ylabel("Temperature")
+    ptl.xlabel("Time (hours)")
+    ptl.ylabel("Temperature (°C)")
+    ptl.plot(df["temperature"], label="Temp")
+
+    ptl.legend()
     ptl.savefig("matrix_analysis.png")
-    print("Visualization saved to matrix_analysis.png")
+    ptl.close()
+    print("Analysis complete!")
+    print("Results saved to: matrix_analysis.png")
+
+
+def show_package_managers() -> None:
+    print("\nPackage Manager Comparison:")
+    print("pip:")
+    print("  - Uses requirements.txt")
+    print("  - Install: pip install -r requirements.txt")
+    print("  - Simple, no lock file by default")
+    print("\nPoetry:")
+    print("  - Uses pyproject.toml")
+    print("  - Install: poetry install")
+    print("  - Generates poetry.lock for reproducible installs")
 
 
 if __name__ == "__main__":
@@ -83,3 +106,4 @@ if __name__ == "__main__":
     temps = generate_matrix_data(temps)
     df = analyse_matrix_data(temps)
     visualize_matrix_data(df)
+    show_package_managers()
