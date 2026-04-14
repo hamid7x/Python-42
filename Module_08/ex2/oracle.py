@@ -1,45 +1,94 @@
 import os
-import sys
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # type: ignore
 
 
 load_dotenv()
 
 
 def load_config() -> dict:
-    mode = os.getenv("MATRIX_MODE")
-    database = os.getenv("DATABASE_URL")
+    matrix_mode = os.getenv("MATRIX_MODE")
+    database_url = os.getenv("DATABASE_URL")
     api_key = os.getenv("API_KEY")
-    log = os.getenv("LOG_LEVEL")
-    endpoint = os.getenv("ZION_ENDPOINT")
+    log_level = os.getenv("LOG_LEVEL")
+    zion_endpoint = os.getenv("ZION_ENDPOINT")
     config = {
-            'mode': mode, 'database': database, 'api_key': api_key,
-            'log': log, 'endpoint': endpoint
+            'mode': matrix_mode, 'database': database_url, 'api_key': api_key,
+            'log': log_level, 'endpoint': zion_endpoint
             }
     return config
 
 
-def check_config(config: dict) -> None:
-    for k, v in config.items():
-        if v is None:
-            print(f"[MISSING] {k} is not configured")
-            sys.exit(1)
-
-
 def display_config(config: dict) -> None:
-    print(f"Mode: {config['mode']}")
-    if config['mode'] == 'develoment':
-        print("Database: Connected to local instance")
+    modes = {'development': 'local', 'production': 'remote'}
+
+    mode_status = config['mode'] if config['mode'] else "Not Configured"
+    print(f"Mode: {mode_status}")
+
+    if config['database'] and config['mode'] in modes:
+        db_location = modes.get(config['mode'], 'unknown')
+        print(f"Database: Connected to {db_location} instance")
     else:
-        print("Database: Connected to remote instance")
-    print(f"API Access: {config['api_key']}")
-    print(f"Log Level: {config['log']}")
-    print(f"Zion Network: {config['endpoint']}")
+        print("Database: Not Connected")
+
+    api_status = "Authenticated" if config['api_key'] else "Not Authenticated"
+    print(f"API Access: {api_status}")
+
+    log_status = config['log'] if config['log'] else "Not Configured"
+    print(f"Log Level: {log_status}")
+
+    zion_status = "Online" if config['endpoint'] else "Offline"
+    print(f"Zion Network: {zion_status}")
+
+
+def check_hardcoded_secrets() -> bool:
+    with open(__file__, 'r') as f:
+        content = f.read()
+        keywords = [
+                'matrix_mode' + ' = "',
+                'matrix_mode' + " = '",
+                'api_key' + ' = "',
+                'api_key' + " = '",
+                'database_url' + ' = "',
+                'database_url' + " = '",
+                'log_level' + ' = "',
+                'log_level' + " = '",
+                'zion_endpoint' + ' = "',
+                'zion_endpoint' + ' = "',
+            ]
+        for keyword in keywords:
+            if keyword in content.lower():
+                return False
+        return True
+
+
+def is_production_override() -> bool:
+    return os.environ.get("MATRIX_MODE") == "production"
+
+
+def security_check() -> None:
+    if check_hardcoded_secrets():
+        print("[OK] No hardcoded secrets detected")
+    else:
+        print("[WARN] hardcoded secrets found!")
+
+    if not os.path.exists(".env"):
+        print("[WARN] .env file not found")
+    elif os.path.getsize(".env") == 0:
+        print("[WARN] .env file is empty")
+    else:
+        print("[OK] .env file is configured")
+
+    if is_production_override():
+        print("[OK] Production overrides available")
+    else:
+        print("[OK] Running in development mode")
 
 
 if __name__ == "__main__":
     print("\nORACLE STATUS: Reading the Matrix...\n")
     print("Configuration loaded:")
     config = load_config()
-    check_config(config)
     display_config(config)
+    print("\nEnvironment security check:")
+    security_check()
+    print("\nThe Oracle sees all configurations.")
