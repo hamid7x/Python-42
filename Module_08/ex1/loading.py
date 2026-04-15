@@ -45,30 +45,27 @@ def fetch_api_data(url: str) -> list:
         temps = data['hourly']['temperature_2m']
     except KeyError:
         print("Unexpected API response format.")
+        sys.exit(1)
     return temps
 
 
-def generate_matrix_data(temps: list) -> list:
+def analyse_and_visualize_matrix_data(temps: list) -> None:
+    pd = import_module("pandas")
     np = import_module('numpy')
-    return np.array(temps)
+    ptl = import_module("matplotlib.pyplot")
 
-
-def analyse_matrix_data(temps: object) -> object:
     print("\nAnalyzing Matrix data...")
     print(f"Processing {len(temps)} data points...")
-    pd = import_module("pandas")
+    temps = np.array(temps)
     df = pd.DataFrame(temps, columns=["temperature"])
-    return df
 
-
-def visualize_matrix_data(df: object) -> object:
     print("Generating visualization...\n")
-    ptl = import_module("matplotlib.pyplot")
     ptl.figure(figsize=(10, 5))
     ptl.title("Matrix Temperature Data")
     ptl.xlabel("Time (hours)")
     ptl.ylabel("Temperature (°C)")
     ptl.plot(df["temperature"], label="Temp")
+    ptl.legend()
     ptl.savefig("matrix_analysis.png")
     ptl.close()
     print("Analysis complete!")
@@ -89,9 +86,4 @@ if __name__ == "__main__":
         missing_dependencies()
         sys.exit(1)
     temps = fetch_api_data(API_URL)
-    print(type(temps))
-    temps = generate_matrix_data(temps)
-    print(type(temps))
-    df = analyse_matrix_data(temps)
-    print(type(df))
-    visualize_matrix_data(df)
+    analyse_and_visualize_matrix_data(temps)
