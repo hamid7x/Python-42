@@ -37,7 +37,7 @@ def missing_dependencies() -> None:
     print("\nThen run this program again.")
 
 
-def fetch_api_data(url: str) -> list:
+def fetch_api_data(url: str) -> list[float]:
     requests = import_module('requests')
     response = requests.get(url)
     data = response.json()
@@ -49,7 +49,7 @@ def fetch_api_data(url: str) -> list:
     return temps
 
 
-def analyse_and_visualize_matrix_data(temps: list) -> None:
+def analyse_and_visualize_matrix_data(temps: list[float]) -> None:
     pd = import_module("pandas")
     np = import_module('numpy')
     ptl = import_module("matplotlib.pyplot")
