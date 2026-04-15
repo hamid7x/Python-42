@@ -53,7 +53,7 @@ def generate_matrix_data(temps: list) -> list:
     return np.array(temps)
 
 
-def analyse_matrix_data(temps):
+def analyse_matrix_data(temps: object) -> object:
     print("\nAnalyzing Matrix data...")
     print(f"Processing {len(temps)} data points...")
     pd = import_module("pandas")
@@ -61,7 +61,7 @@ def analyse_matrix_data(temps):
     return df
 
 
-def visualize_matrix_data(df):
+def visualize_matrix_data(df: object) -> object:
     print("Generating visualization...\n")
     ptl = import_module("matplotlib.pyplot")
     ptl.figure(figsize=(10, 5))
@@ -69,24 +69,10 @@ def visualize_matrix_data(df):
     ptl.xlabel("Time (hours)")
     ptl.ylabel("Temperature (°C)")
     ptl.plot(df["temperature"], label="Temp")
-
-    ptl.legend()
     ptl.savefig("matrix_analysis.png")
     ptl.close()
     print("Analysis complete!")
     print("Results saved to: matrix_analysis.png")
-
-
-def show_package_managers() -> None:
-    print("\nPackage Manager Comparison:")
-    print("pip:")
-    print("  - Uses requirements.txt")
-    print("  - Install: pip install -r requirements.txt")
-    print("  - Simple, no lock file by default")
-    print("\nPoetry:")
-    print("  - Uses pyproject.toml")
-    print("  - Install: poetry install")
-    print("  - Generates poetry.lock for reproducible installs")
 
 
 if __name__ == "__main__":
@@ -103,7 +89,9 @@ if __name__ == "__main__":
         missing_dependencies()
         sys.exit(1)
     temps = fetch_api_data(API_URL)
+    print(type(temps))
     temps = generate_matrix_data(temps)
+    print(type(temps))
     df = analyse_matrix_data(temps)
+    print(type(df))
     visualize_matrix_data(df)
-    show_package_managers()

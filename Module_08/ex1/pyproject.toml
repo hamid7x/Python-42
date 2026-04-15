@@ -7,12 +7,10 @@ authors = [
 ]
 requires-python = ">=3.10"
 dependencies = [
-    "requests (>=2.31.0)",
-    "pandas (>=2.1.0)",
-    "numpy (>=1.25.0)",
-    "matplotlib (>=3.7.2)"
 ]
 
+[tool.poetry]
+package-mode = false
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
