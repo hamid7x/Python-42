@@ -2,10 +2,8 @@ import os
 from dotenv import load_dotenv  # type: ignore
 
 
-load_dotenv()
-
-
 def load_config() -> dict:
+    load_dotenv()
     matrix_mode = os.getenv("MATRIX_MODE")
     database_url = os.getenv("DATABASE_URL")
     api_key = os.getenv("API_KEY")
@@ -33,8 +31,14 @@ def display_config(config: dict) -> None:
     api_status = "Authenticated" if config['api_key'] else "Not Authenticated"
     print(f"API Access: {api_status}")
 
-    log_status = config['log'] if config['log'] else "Not Configured"
-    print(f"Log Level: {log_status}")
+    if config['log']:
+        if config['mode'] == "development":
+            log_status = config['log']
+        else:
+            log_status = "INFO"
+        print(f"Log Level: {log_status}")
+    else:
+        print("Log Level: Not Configured")
 
     zion_status = "Online" if config['endpoint'] else "Offline"
     print(f"Zion Network: {zion_status}")
