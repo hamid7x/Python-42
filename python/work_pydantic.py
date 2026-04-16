@@ -4,7 +4,8 @@ from datetime import datetime
 
 
 class User(BaseModel):
-    full_name: str = Field(min_length=5, max_length=30)
+    full_name: str = Field(min_length=5, max_length=30,
+                           description="User full name")
     age: int = Field(ge=0, le=120)
     username: Optional[str] = None
 
@@ -15,7 +16,9 @@ class Event(BaseModel):
 
 try:
     u = User(full_name="Jhon Doe", age="23", username="Jhone_22")
-    print(u)
+    print(u.full_name)
+    print(u.age)
+
     e = Event(date="2024-01-01T10:00:00")
     print(e.date)
 except ValidationError as e:
