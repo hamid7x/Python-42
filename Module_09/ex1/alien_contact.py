@@ -1,10 +1,10 @@
-from datetime  import datetime
+from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field, model_validator, ValidationError
 from enum import Enum
 
 
-class ContactType(Enum):
+class ContactType(str, Enum):
     radio = "radio",
     visual = "visual",
     physical = "telepathic",
@@ -20,7 +20,11 @@ class AlienContact(BaseModel):
     duration_minutes: int = Field(..., ge=1, le=1440)
     witness_count: int = Field(..., ge=1, le=100)
     message_received: Optional[str] = Field(default=None, max_length=500)
-    is_verified: bool = False
+    is_verified: bool = Field(default=False)
+
+    def validate_rules() -> None:
+        if not self.contact_id.start
+
 
 
 def display_alien(alien: AlienContact) -> None:
