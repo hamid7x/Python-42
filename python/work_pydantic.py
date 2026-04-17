@@ -23,3 +23,47 @@ try:
     print(e.date)
 except ValidationError as e:
     print(f"{e.errors()[0]['msg']}")
+
+
+age: int = Field(ge=18, le=80)
+x: int = Field(ge=18, le=80)
+# print(age)
+# print(x)
+
+
+class Test(BaseModel):
+    age: int = Field(default=220, ge=10, le=30)
+
+    # pydantic doesn't validate the default values automaticly
+    # force to validate the default value
+    model_config = {
+        "validate_default": True
+    }
+
+
+try:
+    t = Test()
+    print(t.age)
+except ValidationError as e:
+    print(f"{e.errors()[0]['msg']}")
+
+age: int = Field(ge=10, le=44)
+age = 99
+print(age)
+
+# Implicit
+x = 5
+print(type(x))
+
+# Explicit
+y: int = "x"
+print(type(y))
+y = "abc"
+print(y)
+
+class Testing(BaseModel):
+    age: int
+
+s = Testing(age="22")
+print(s.age)
+
