@@ -1,3 +1,4 @@
+from typing import Optional
 """
 Manual validation (WITHOUT Pydantic)
 """
@@ -63,26 +64,37 @@ class AlienContact(BaseModel):
     signal: float = Field(ge=0, le=10)
     contact_type: ContactType
     witness_count: int = Field(ge=1, le=100)
-
+    test: int = Field(default=4)
+    op_test: Optional[str] = Field(default=None)
 
     def model_post_init(self, __context):
         if self.contact_type == "telepathic" and self.witness_count < 3:
             raise ValueError("telepathic contact requires at least 3 witnesses")
 
 
+data = [
+    {
+        "name": "john",
+        "age": "20",
+        "signal": "8.5",
+        "contact_type": "telepathic",
+        "witness_count": 5
+    },
+    {
+        "name": "john",
+        "age": "20",
+        "signal": "8.5",
+        "contact_type": "telepathic",
+        "witness_count": 2
+    }
+]
+for d in data:
+    try:
+        contact = AlienContact(**d)
+        print(contact)
+        print(repr(contact))
+        print("VALID DATA:", contact)
 
-
-data = {
-    "name": "john",
-    "age": "20",
-    "signal": "8.5",
-    "contact_type": "telepathic",
-    "witness_count": 1
-}
-
-try:
-    contact = AlienContact(**data)
-    print("VALID DATA:", contact)
-
-except ValidationError as e:
-    print(e.errors()[0]["msg"])
+    except ValidationError as e:
+        print("Expected validation error:")
+        print(e.errors()[0]["msg"])
