@@ -1,14 +1,14 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Any
 from pydantic import BaseModel, Field, ValidationError
 
 
 class SpaceStation(BaseModel):
-    station_id: str = Field(..., min_length=3, max_length=10)
-    name: str = Field(..., min_length=1, max_length=50)
-    crew_size: int = Field(..., ge=1, le=20)
-    power_level: float = Field(..., ge=0.0, le=100.0)
-    oxygen_level: float = Field(..., ge=0.0, le=100.0)
+    station_id: str = Field(min_length=3, max_length=10)
+    name: str = Field(min_length=1, max_length=50)
+    crew_size: int = Field(ge=1, le=20)
+    power_level: float = Field(ge=0.0, le=100.0)
+    oxygen_level: float = Field(ge=0.0, le=100.0)
     last_maintenance: datetime = Field(...)
     is_operational: bool = Field(default=True)
     notes: Optional[str] = Field(default=None, max_length=200)
@@ -21,42 +21,41 @@ def display_station(station: SpaceStation) -> None:
     print(f"Power: {station.power_level}%")
     print(f"Oxygen: {station.oxygen_level}%")
     print(f"Status: {'Operational' if station.is_operational else 'Offline'}")
+    print()
 
 
 def main() -> None:
-    print("Space Station Data Validation")
-    print("=" * 40)
-    print("Valid station created:")
-    try:
-        station = SpaceStation(
-            station_id="ISS001",
-            name="International Space Station",
-            crew_size=6,
-            power_level=85.5,
-            oxygen_level=92.3,
-            last_maintenance="2026-04-15 16:30:00",
-            notes="All systems nominal."
-        )
-        display_station(station)
-    except ValidationError as e:
-        print(f"{e.errors()[0]['msg']}")
+    station_data: list[dict[str, Any]] = [
+        {
+            "station_id": "ISS001",
+            "name": "International Space Station",
+            "crew_size": 6,
+            "power_level": 85.5,
+            "oxygen_level": 92.3,
+            "last_maintenance": "2026-04-15T16:30:00",
+            "notes": "everything is good"
+        },
+        {
+            "station_id": "ISS001",
+            "name": "International Space Station",
+            "crew_size": 61,
+            "power_level": 85.5,
+            "oxygen_level": 92.3,
+            "last_maintenance": "2026-04-15T16:30:00",
+            "notes": "bad data"
+        },
+    ]
 
-    print()
-    print("=" * 40)
-    print("Expected validation error:")
-    try:
-        station_error = SpaceStation(
-            station_id="ISS001",
-            name="International Space Station",
-            crew_size=61,
-            power_level=85.5,
-            oxygen_level=92.3,
-            last_maintenance="2026-04-15 16:30:00",
-            notes="All systems nominal."
-        )
-        display_station(station_error)
-    except ValidationError as e:
-        print(f"{e.errors()[0]['msg']}")
+    print("Space Station Data Validation")
+    for d in station_data:
+        print("=" * 40)
+        try:
+            station = SpaceStation(**d)
+            print("Valid station created:")
+            display_station(station)
+        except ValidationError as e:
+            print("Expected validation error:")
+            print(f"{e.errors()[0]['msg']}")
 
 
 if __name__ == "__main__":
