@@ -24,17 +24,21 @@ def mage_stats(mages: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
+
     artifacts = [
-        {'name': 'Shadow Blade', 'power': 78, 'type': 'weapon'},
+        {'name': 'Storm Crown', 'power': 81, 'type': 'accessory'},
+        {'name': 'Wind Cloak', 'power': 50, 'type': 'accessory'},
+        {'name': 'Light Prism', 'power': 70, 'type': 'armor'},
         {'name': 'Fire Staff', 'power': 92, 'type': 'weapon'},
         {'name': 'Crystal Orb', 'power': 85, 'type': 'orb'},
     ]
+
     mages = [
-        {'name': 'Aldric', 'power': 45, 'element': 'fire'},
-        {'name': 'Lyra', 'power': 82, 'element': 'water'},
-        {'name': 'Zephyr', 'power': 63, 'element': 'air'},
-        {'name': 'Terra', 'power': 91, 'element': 'earth'},
-        {'name': 'Nova', 'power': 38, 'element': 'lightning'},
+        {'name': 'Casey', 'power': 97, 'element': 'fire'},
+        {'name': 'Luna', 'power': 53, 'element': 'shadow'},
+        {'name': 'Luna', 'power': 90, 'element': 'earth'},
+        {'name': 'Rowan', 'power': 89, 'element': 'ice'},
+        {'name': 'Nova', 'power': 78, 'element': 'wind'}
     ]
 
     print("\nTesting artifact sorter...")
@@ -45,7 +49,7 @@ if __name__ == "__main__":
           f" ({sorted_artifacts[1]['power']} power)")
 
     print("\nTesting power filter...")
-    filtered_mages = power_filter(mages, 50)
+    filtered_mages = power_filter(mages, 80)
     for mage in filtered_mages:
         print(f"{mage['name']} (power: {mage['power']}) passed the filter")
 
