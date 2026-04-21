@@ -1,4 +1,5 @@
-from typing import Callable, Any
+from collections.abc import Callable
+from typing import Any
 from functools import reduce, partial, lru_cache, singledispatch
 from operator import add, mul
 
@@ -7,7 +8,7 @@ def spell_reducer(spells: list[int], operation: str) -> int:
     if not spells:
         return 0
 
-    operators = {
+    operators: dict[str, Callable[[int, int], int]] = {
         "add": add,
         "multiply": mul,
         "max": max,
