@@ -1,4 +1,5 @@
-from typing import Callable, Any
+from typing import Any
+from collections.abc import Callable
 
 
 def mage_counter() -> Callable:
@@ -33,7 +34,6 @@ def memory_vault() -> dict[str, Callable]:
     memory_store = {}
 
     def store(key: Any, value: Any) -> None:
-        nonlocal memory_store
         memory_store.update({key: value})
 
     def recall(key: Any) -> Any:
