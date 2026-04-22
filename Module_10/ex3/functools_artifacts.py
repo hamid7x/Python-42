@@ -26,9 +26,9 @@ def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
     water = partial(base_enchantment, power=50, element="water")
     wind = partial(base_enchantment, power=50, element="wind")
     return {
-        "fire": fire,
-        "water": water,
-        "wind": wind
+        "fire_enchant": fire,
+        "water_enchant": water,
+        "wind_enchant": wind
     }
 
 
@@ -75,10 +75,10 @@ if __name__ == "__main__":
     print(f"Max: {spell_max}")
 
     print("\nTesting partial enchanter...")
-    functs = partial_enchanter(base_enchantment)
-    print(functs['fire'](target="Dragon"))
-    print(functs['water'](target="Well"))
-    print(functs['wind'](target="Egle"))
+    result = partial_enchanter(base_enchantment)
+    print(result['fire_enchant'](target="Phoenix"))
+    print(result['water_enchant'](target="Kraken"))
+    print(result['wind_enchant'](target="Griffin"))
 
     print("\nTesting memoized fibonacci...")
     print(f"Fib(0): {memoized_fibonacci(0)}")
