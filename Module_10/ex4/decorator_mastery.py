@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
     print("\nTesting MageGuild...")
     mage = MageGuild()
-    print(mage.validate_mage_name('Alex'))
-    print(mage.validate_mage_name('Alex23'))
+    print(MageGuild.validate_mage_name('Alex'))
+    print(MageGuild.validate_mage_name('Alex23'))
     print(mage.cast_spell('Lightning', 15))
     print(mage.cast_spell('Shadow', 8))
