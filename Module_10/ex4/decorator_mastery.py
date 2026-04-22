@@ -23,7 +23,7 @@ def power_validator(min_power: int) -> Callable:
             result = "Insufficient power for this spell"
             power = args[-1]
             if power >= min_power:
-                result = func(power)
+                result = func(*args)
             return result
         return wrapper
     return decorator
@@ -50,7 +50,7 @@ def retry_spell(max_attempts: int) -> Callable:
 class MageGuild:
     @staticmethod
     def validate_mage_name(name: str) -> bool:
-        return all(c.isalpha or c.isspace for c in name) and len(name) >= 3
+        return all(c.isalpha() or c.isspace() for c in name) and len(name) >= 3
 
     @power_validator(min_power=10)
     def cast_spell(self, spell_name: str, power: int) -> str:
@@ -95,4 +95,5 @@ if __name__ == "__main__":
     mage = MageGuild()
     print(mage.validate_mage_name('Alex'))
     print(mage.validate_mage_name('Alex23'))
-    print(mage.cast_spell('Dragon', 50))
+    print(mage.cast_spell('Lightning', 15))
+    print(mage.cast_spell('Shadow', 8))
